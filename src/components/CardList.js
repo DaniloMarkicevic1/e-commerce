@@ -5,7 +5,7 @@ import CardItem from './CardItem';
 
 function CardList({ items, counter, handleCard }) {
     return (
-        <Container fluid>
+        <Container fluid className="mb-3">
             <Row>
                 {items.map((item, i) => (
                     <Col key={i}>
