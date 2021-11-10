@@ -11,10 +11,13 @@ function Filter(props) {
             <Row>
                 {names.map((name, i) => (
                     <Col key={i}>
-                        <FilterItem name={name} filter={props.filter} />
+                        <FilterItem
+                            className="hover"
+                            name={name}
+                            filter={props.filter}
+                        />
                     </Col>
                 ))}
-                {/* )) */}
                 <Button className="w-25" onClick={props.removeFilter}>
                     Remove Filter
                 </Button>
