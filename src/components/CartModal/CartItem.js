@@ -1,4 +1,4 @@
-import Button from './Button';
+import Button from '../Body/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -13,8 +13,8 @@ function CartItem({
     handleCard,
     handlePlus,
     handleMinus,
+    count,
 }) {
-    console.log(id);
     return (
         <Card style={{ width: '100%' }} className="mx-auto mt-3">
             <Card.Body className="d-flex flex-row ">
@@ -41,7 +41,7 @@ function CartItem({
                                 btnText="+"
                                 id={id}
                             />
-                            <div className="my-auto mx-2"></div>
+                            <div className="my-auto mx-2">{count}</div>
                             <CartButton
                                 onClick={handleMinus}
                                 btnText="-"

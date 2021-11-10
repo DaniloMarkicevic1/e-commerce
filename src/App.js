@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import CardList from './components/CardList';
-import Header from './components/Header';
+import CardList from './components/Body/CardList';
+import Header from './components/CartModal/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dell from './assets/images/del.jpg';
 import Hp from './assets/images/hp.jpg';
@@ -96,13 +96,18 @@ function App() {
     let newItems = [];
     function addCardToCartHandler(id) {
         newItems = [...modalItems];
-        newItems.push(items[id]);
+        let index = [newItems.length];
+        if (newItems.includes(items[id])) {
+            return;
+        } else {
+            newItems.push(items[id]);
+            newItems[index].count += 1;
+        }
         setModalItems(newItems);
         counterIncreaseHandler();
     }
 
     function removeFromCartHandler(id) {
-        console.log(id);
         newItems = [...modalItems];
         newItems.splice(id, 1);
         setModalItems(newItems);
@@ -121,6 +126,25 @@ function App() {
         setModalItems([]);
         setCounter(0);
     }
+
+    function plusHandler(id) {
+        newItems = [...modalItems];
+        newItems[id].count += 1;
+        setModalItems(newItems);
+        counterIncreaseHandler();
+    }
+
+    function minusHandler(id) {
+        newItems = [...modalItems];
+        if (newItems[id].count === 1) {
+            removeFromCartHandler(id);
+            return;
+        } else {
+            newItems[id].count -= 1;
+            setModalItems(newItems);
+            counterDecreaseHandler();
+        }
+    }
     return (
         <div className="App">
             <Header
@@ -129,6 +153,8 @@ function App() {
                 counter={counter}
                 cartItems={modalItems}
                 handleCard={(id) => removeFromCartHandler(id)}
+                handlePlus={(id) => plusHandler(id)}
+                handleMinus={(id) => minusHandler(id)}
             />
             <CardList
                 items={items}

@@ -9,6 +9,7 @@ function CartList({
     totalPrice,
     handlePlus,
     handleMinus,
+    count,
 }) {
     return (
         <Container fluid>

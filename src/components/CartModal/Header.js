@@ -10,6 +10,7 @@ function Header({
     clearAll,
     handlePlus,
     handleMinus,
+    count,
 }) {
     return (
         <header className="d-md-flex flex-md-row justify-content-between align-items-center p-4">
@@ -34,6 +35,7 @@ function Header({
                     clearAll={clearAll}
                     handlePlus={handlePlus}
                     handleMinus={handleMinus}
+                    count={count}
                 />
             </div>
         </header>
