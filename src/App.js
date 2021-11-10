@@ -80,8 +80,8 @@ const itemList = [
 ];
 
 function App() {
-    const [items, setItems] = useState();
-    setItems(itemList);
+    const [items, setItems] = useState(itemList);
+    // setItems(itemList);
     const [counter, setCounter] = useState(0);
     const [modalItems, setModalItems] = useState([]);
     let newItems = [];
@@ -114,6 +114,7 @@ function App() {
     return (
         <div className="App">
             <Header
+                asd={setItems}
                 clearAll={clearAllHandler}
                 counter={counter}
                 cartItems={modalItems}
