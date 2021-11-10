@@ -11,6 +11,7 @@ function CartList({ items, counter, handleCard, totalPrice }) {
                         name={item.name}
                         price={item.price}
                         counter={counter}
+                        count={item.count}
                         handleCard={handleCard}
                         id={i}
                     />

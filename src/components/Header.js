@@ -5,17 +5,21 @@ import Button from 'react-bootstrap/Button';
 
 function Header({ counter, cartItems, handleCard, clearAll }) {
     return (
-        <header className="d-flex flex-row justify-content-between align-items-center p-4">
-            <p className="m-0 p-3 fw-bold border border-primary rounded">
+        <header className="d-md-flex flex-md-row justify-content-between align-items-center p-4">
+            <p className="m-3 p-3 fw-bold border border-primary rounded m-md-0">
                 E-commerce
             </p>
             <Form className="d-flex flex-row">
-                <Form.Control type="text" placeholder="Search..." />
-                <Button variant="primary" type="submit">
+                <Form.Control
+                    type="text"
+                    placeholder="Search..."
+                    className="m-md-0 m-3"
+                />
+                <Button variant="primary" type="submit" className="m-md-0 m-3">
                     Search
                 </Button>
             </Form>
-            <div className="d-flex align-items-center border border-primary rounded p-1">
+            <div className="d-flex justify-content-center justify-content-md-unset align-items-center border border-primary rounded p-1 m-3 m-md-0">
                 <p className="m-0">Items In Cart: {counter}</p>
                 <CartModal
                     cartItems={cartItems}
