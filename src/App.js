@@ -113,6 +113,7 @@ function App() {
     return (
         <div className="App">
             <Header
+                setItemFunc={setItems}
                 clearAll={clearAllHandler}
                 counter={counter}
                 cartItems={modalItems}
