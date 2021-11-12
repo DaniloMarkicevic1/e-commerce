@@ -207,7 +207,7 @@ function App() {
     function clearAllHandler() {
         setModalItems([]);
         storage([]);
-        storageCounterItem = 0;
+        localStorage.setItem('localStorageCounter', 0);
     }
 
     function submitHandler(e) {
