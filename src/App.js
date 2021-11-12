@@ -212,7 +212,7 @@ function App() {
 
     function submitHandler(e) {
         const filteredItems = [...itemList];
-        let searchParam = e.target.childNodes[0].value;
+        let searchParam = e.target.childNodes[0].value.toLowerCase();
 
         let newList = filteredItems.filter((item) =>
             item.name.toLowerCase().includes(searchParam)
