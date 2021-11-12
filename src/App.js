@@ -196,7 +196,7 @@ function App() {
 
         localStorage.setItem('localStorageList', JSON.stringify(newList));
         setItems(newList);
-        storage(newList);
+        // storage(newList);
     }
 
     function removeFilterHandler() {
@@ -222,7 +222,7 @@ function App() {
 
         localStorage.setItem('localStorageList', JSON.stringify(newList));
         setItems(newList);
-        storage(newList);
+        // storage(newList);
     }
 
     return (
