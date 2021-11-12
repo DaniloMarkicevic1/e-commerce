@@ -7,10 +7,12 @@ import CartList from './CartList';
 function MyVerticallyCenteredModal(props) {
     let totalPrice = 0;
     let regEx = /\D/g;
+
     props.props.cartItems.forEach((item, i) => {
         let price = item.price.replace(regEx, '');
         totalPrice += +price * +props.props.cartItems[i].count;
     });
+
     return (
         <Modal
             {...props}

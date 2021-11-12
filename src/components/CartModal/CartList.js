@@ -27,6 +27,7 @@ function CartList({
                     />
                 </Row>
             ))}
+
             <Row className="text-center pt-4 pb-0">
                 <p className="m-auto fw-bold">Total Price: ${totalPrice}</p>
             </Row>

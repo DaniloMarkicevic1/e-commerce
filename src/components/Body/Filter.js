@@ -10,7 +10,7 @@ function Filter(props) {
         <Container>
             <Row>
                 {names.map((name, i) => (
-                    <Col key={i}>
+                    <Col key={i} className="my-auto">
                         <FilterItem
                             className="hover"
                             name={name}

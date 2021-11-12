@@ -11,18 +11,26 @@ function Header({
     handlePlus,
     handleMinus,
     count,
+    handleSubmit,
 }) {
     return (
         <header className="d-md-flex flex-md-row justify-content-between align-items-center p-4">
             <p className="m-3 p-3 fw-bold border border-primary rounded m-md-0">
                 E-commerce
             </p>
-            <Form className="d-flex flex-row">
+            <Form
+                className="d-flex flex-row"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit(e);
+                }}
+            >
                 <Form.Control
                     type="text"
                     placeholder="Search..."
                     className="m-md-0 m-3"
                 />
+
                 <Button variant="primary" type="submit" className="m-md-0 m-3">
                     Search
                 </Button>

@@ -90,22 +90,61 @@ const itemList = [
         count: 0,
     },
 ];
-function App() {
-    const [items, setItems] = useState(itemList);
-    const [counter, setCounter] = useState(0);
-    const [modalItems, setModalItems] = useState([]);
 
+// Seting up Local Storage
+let storageItems;
+let storageCounterItem;
+let storageModalItems = [];
+
+if (localStorage.getItem('localStorageList')) {
+    storageModalItems = JSON.parse(
+        localStorage.getItem('localStorageModalItems')
+    );
+    localStorage.setItem('localStorageList', JSON.stringify(storageModalItems));
+
+    storageItems = JSON.parse(localStorage.getItem('localStorageList'));
+
+    storageCounterItem = localStorage.getItem('localStorageCounter');
+} else {
+    localStorage.setItem('localStorageList', JSON.stringify(itemList));
+    storageItems = JSON.parse(localStorage.getItem('localStorageList'));
+
+    localStorage.setItem('localStorageCounter', 0);
+    storageCounterItem = 0;
+
+    localStorage.setItem('localStorageModalItems', JSON.stringify([]));
+}
+
+function App() {
+    const [items, setItems] = useState(storageItems);
+    const [counter, setCounter] = useState(+storageCounterItem);
+    const [modalItems, setModalItems] = useState(storageModalItems);
     let newItems = [];
+
+    function storage(items) {
+        localStorage.setItem('localStorageModalItems', JSON.stringify(items));
+
+        storageModalItems = JSON.parse(
+            localStorage.getItem('localStorageModalItems')
+        );
+    }
+
+    function counterStorage(count) {
+        localStorage.setItem('localStorageCounter', +count);
+    }
 
     function addCardToCartHandler(id) {
         newItems = [...modalItems];
         let index = [newItems.length];
+
         if (newItems.includes(items[id])) {
             return;
         } else {
             newItems.push(items[id]);
             newItems[index].count += 1;
         }
+
+        storage(newItems);
         setModalItems(newItems);
         counterIncreaseHandler();
     }
@@ -113,49 +152,76 @@ function App() {
     function removeFromCartHandler(id) {
         newItems = [...modalItems];
         newItems.splice(id, 1);
+
         setModalItems(newItems);
+        storage(newItems);
         counterDecreaseHandler();
     }
 
     function counterIncreaseHandler() {
         setCounter(counter + 1);
+        counterStorage(+counter + 1);
     }
 
     function counterDecreaseHandler() {
         setCounter(counter - 1);
+        counterStorage(+counter - 1);
     }
 
     function plusHandler(id) {
         newItems = [...modalItems];
         newItems[id].count += 1;
-        setModalItems(newItems);
+
         counterIncreaseHandler();
+        setModalItems(newItems);
+        storage(newItems);
     }
 
     function minusHandler(id) {
         newItems = [...modalItems];
+
         if (newItems[id].count === 1) {
             removeFromCartHandler(id);
             return;
         } else {
             newItems[id].count -= 1;
-            setModalItems(newItems);
             counterDecreaseHandler();
         }
+
+        storage(newItems);
     }
+
     function filterHandler(name) {
         const filteredItems = [...itemList];
         let newList = filteredItems.filter((item) => item.name.includes(name));
+
         setItems(newList);
+        storage(newList);
     }
 
     function removeFilterHandler() {
         setItems(itemList);
+        storage(itemList);
     }
+
     function clearAllHandler() {
         setModalItems([]);
-        setCounter(0);
+        storage([]);
+        storageCounterItem = 0;
     }
+
+    function submitHandler(e) {
+        const filteredItems = [...itemList];
+        let searchParam = e.target.childNodes[0].value;
+
+        let newList = filteredItems.filter((item) =>
+            item.name.toLowerCase().includes(searchParam)
+        );
+
+        setItems(newList);
+        storage(newList);
+    }
+
     return (
         <div className="App">
             <Header
@@ -166,6 +232,7 @@ function App() {
                 handleCard={(id) => removeFromCartHandler(id)}
                 handlePlus={(id) => plusHandler(id)}
                 handleMinus={(id) => minusHandler(id)}
+                handleSubmit={(e) => submitHandler(e)}
             />
             <Filter
                 filter={(e) => filterHandler(e)}
