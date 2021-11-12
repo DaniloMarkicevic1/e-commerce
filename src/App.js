@@ -201,7 +201,6 @@ function App() {
     function removeFilterHandler() {
         localStorage.setItem('localStorageList', JSON.stringify(itemList));
         setItems(itemList);
-        storage([]);
     }
 
     function clearAllHandler() {
