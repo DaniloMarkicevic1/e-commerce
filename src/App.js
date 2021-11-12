@@ -97,12 +97,11 @@ let storageCounterItem;
 let storageModalItems = [];
 
 if (localStorage.getItem('localStorageList')) {
+    storageItems = JSON.parse(localStorage.getItem('localStorageList'));
+
     storageModalItems = JSON.parse(
         localStorage.getItem('localStorageModalItems')
     );
-    localStorage.setItem('localStorageList', JSON.stringify(storageModalItems));
-
-    storageItems = JSON.parse(localStorage.getItem('localStorageList'));
 
     storageCounterItem = localStorage.getItem('localStorageCounter');
 } else {
@@ -195,19 +194,22 @@ function App() {
         const filteredItems = [...itemList];
         let newList = filteredItems.filter((item) => item.name.includes(name));
 
+        localStorage.setItem('localStorageList', JSON.stringify(newList));
         setItems(newList);
         storage(newList);
     }
 
     function removeFilterHandler() {
+        localStorage.setItem('localStorageList', JSON.stringify(itemList));
         setItems(itemList);
-        storage(itemList);
+        storage([]);
     }
 
     function clearAllHandler() {
         setModalItems([]);
         storage([]);
         localStorage.setItem('localStorageCounter', 0);
+        setCounter(0);
     }
 
     function submitHandler(e) {
@@ -218,6 +220,7 @@ function App() {
             item.name.toLowerCase().includes(searchParam)
         );
 
+        localStorage.setItem('localStorageList', JSON.stringify(newList));
         setItems(newList);
         storage(newList);
     }
